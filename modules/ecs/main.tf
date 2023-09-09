@@ -61,9 +61,11 @@ resource "aws_ecs_service" "service" {
   cluster         = aws_ecs_cluster.cluster.id
   task_definition = aws_ecs_task_definition.task-definition.arn
   desired_count   = var.task-desired-count
-  lifecycle {
-    ignore_changes = [desired_count]
-  }
+
+  # use auto scale strategy to set the amount of desired_count
+#  lifecycle {
+#    ignore_changes = [desired_count]
+#  }
 
   network_configuration {
     subnets         = var.ecs-private-subnets-ids

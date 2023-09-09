@@ -51,3 +51,10 @@ module "ecs" {
   ecs-security-group = module.vpc.ecs-sg
   task-desired-count = 3
 }
+
+module "auto-scaling" {
+  source             = "./modules/auto-scaling"
+  auto-scaling-name  = var.project-name
+  ecs-cluster-name = module.ecs.ecs-cluster-name
+  ecs-service-name = module.ecs.ecs-service-name
+}
