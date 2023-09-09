@@ -13,8 +13,7 @@ resource "aws_lb" "alb" {
 
   access_logs {
     bucket  = var.s3-bucket
-    # store in the root
-    #prefix  = "test-lb"
+    prefix  = var.alb-log-s3-prefix
     enabled = true
   }
 

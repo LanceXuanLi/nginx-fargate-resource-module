@@ -64,6 +64,6 @@ resource "aws_wafv2_web_acl" "waf" {
 
 
 resource "aws_wafv2_web_acl_association" "example" {
-  resource_arn = var.aln-arn
+  resource_arn = var.alb-arn
   web_acl_arn  = aws_wafv2_web_acl.waf.arn
 }

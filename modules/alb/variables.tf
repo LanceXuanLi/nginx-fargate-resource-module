@@ -23,9 +23,10 @@ variable "s3-bucket" {
   type = string
 }
 
-variable "s3-prefix" {
+variable "alb-log-s3-prefix" {
   description = "Prefix of S3 bucket"
   type = string
+  default = ""
 }
 
 variable "alb-env" {

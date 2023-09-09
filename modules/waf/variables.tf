@@ -13,7 +13,7 @@ variable "waf-description" {
   type        = string
 }
 
-variable "aln-arn" {
+variable "alb-arn" {
   description = "ARN of the ALB"
   type        = string
 }
