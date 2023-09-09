@@ -34,14 +34,14 @@ resource "aws_ecs_task_definition" "task-definition" {
   memory                   = 512
   container_definitions    = jsonencode([
     {
-      name         = "nginx-server"
+      name         = "${var.ecs-name}-container"
       image        = "nginx:latest"
       cpu          = 256
       memory       = 512
       portMappings = [
         {
           containerPort = 80
-          hostPort      = 8080
+          hostPort      = 80
         }
       ]
     }
@@ -60,7 +60,6 @@ resource "aws_ecs_service" "service" {
   name            = "${var.ecs-name}-service"
   cluster         = aws_ecs_cluster.cluster.id
   task_definition = aws_ecs_task_definition.task-definition.arn
-  launch_type     = "FARGATE"
   desired_count   = var.task-desired-count
   lifecycle {
     ignore_changes = [desired_count]
@@ -81,15 +80,11 @@ resource "aws_ecs_service" "service" {
     capacity_provider = "FARGATE_SPOT"
     weight            = 1
   }
-  ordered_placement_strategy {
-    # randomly search a container instance
-    type = "random"
-  }
 
   load_balancer {
     target_group_arn = var.alb-target-group-arn
     container_name   = "${var.ecs-name}-container"
-    container_port   = 8080
+    container_port   = 80
   }
 
 

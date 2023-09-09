@@ -19,7 +19,7 @@ resource "aws_wafv2_web_acl" "waf" {
       rate_based_statement {
         # 60 per minute = 300 per 5 minute, limit is
         limit         = 300
-        aggregate_key = "IP"
+        aggregate_key_type  = "IP"
       }
     }
     visibility_config {
@@ -33,7 +33,9 @@ resource "aws_wafv2_web_acl" "waf" {
     # https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-baseline.html#aws-managed-rule-groups-baseline-crs
     name     = "managed-common-rule-set"
     priority = 10
-
+    override_action {
+      none {}
+    }
     statement {
       managed_rule_group_statement {
         name        = "AWSManagedRulesCommonRuleSet"
