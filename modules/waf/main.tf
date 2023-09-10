@@ -16,6 +16,10 @@ resource "aws_wafv2_web_acl" "waf" {
       block {}
     }
     statement {
+      # https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based-request-limiting.html
+      # AWS WAF checks the rate of requests every 30 seconds, and counts requests for the prior 5 minutes each time.
+      # Because of this, it's possible for an aggregation instance to have requests coming in at too high a rate for up to 30 seconds before AWS WAF detects and rate limits the requests for the instance.
+      # Similarly. the request rate can be below the limit for up to 30 seconds before AWS WAF detects the decrease and discontinues rate limiting for the instance.
       rate_based_statement {
         # 60 per minute = 300 per 5 minute, limit is
         limit         = 300
