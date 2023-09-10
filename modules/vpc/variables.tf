@@ -8,7 +8,7 @@ variable "vpc-env" {
   type = string
 }
 
-variable "first_n_azs" {
+variable "first-n-azs" {
   description = "First n azs will be used"
   type = number
 

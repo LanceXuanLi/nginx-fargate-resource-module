@@ -3,7 +3,7 @@ data "aws_availability_zones" "azs" {
 }
 
 locals {
-  available_azs = slice(data.aws_availability_zones.azs.names, 0, var.first_n_azs)
+  available_azs = slice(data.aws_availability_zones.azs.names, 0, var.first-n-azs)
 }
 
 resource "aws_vpc" "vpc" {
