@@ -19,7 +19,7 @@ top 10 attacks.
 
 ```hcl
 module "public_nginx_server" {
-  source = "git::https://github.com/LanceXuanLi/nginx-fargate-resource-module.git"
+  source = "git::https://github.com/LanceXuanLi/nginx-fargate-resource-module.git?ref=v1.0.0"
 
   // Add necessary variables here, change them to your preference
   project-name      = "test"
